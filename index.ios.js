@@ -8,7 +8,7 @@ import {
   Image
 } from 'react-native';
 
-import Forecast from './Forecast.js';
+import Forecast from './components/forecast.js';
 
 export default class WeatherProject extends Component {
   constructor(props) {
