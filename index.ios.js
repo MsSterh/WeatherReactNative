@@ -5,7 +5,8 @@ import {
   Text,
   TextInput,
   View,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native';
 
 import Forecast from './components/forecast.js';
@@ -17,6 +18,8 @@ export default class WeatherProject extends Component {
       zip: '',
       forecast: null
     };
+    console.log('this = ')
+    console.log(this)
   }
 
   _handleTextChange(event) {
@@ -38,6 +41,10 @@ export default class WeatherProject extends Component {
       .catch((error) => {
         console.warn(error)
       })
+  }
+
+  _onPress(content) {
+    this.setState({zip: ''})
   }
 
   render() {
@@ -64,10 +71,14 @@ export default class WeatherProject extends Component {
                          onChangeText={(zip) => this.setState({zip})}
                          onSubmitEditing={(event) => this._handleTextChange(event)}
                          value={this.state.zip}/>
-              </View>
             </View>
+          </View>
           {content}
         </View>
+        <TouchableHighlight onPress={(e) => this._onPress(e)}
+                            style={styles.touchable}>
+          <Text></Text>
+        </TouchableHighlight>
       </Image>
     );
   }
@@ -109,6 +120,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#ffffff',
     fontSize: baseFontSize
+  },
+  touchable: {
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    flex: 1
   }
 });
 
