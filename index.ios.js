@@ -43,8 +43,11 @@ export default class WeatherProject extends Component {
       })
   }
 
-  _onPress(content) {
-    this.setState({zip: ''})
+  _onPress() {
+    this.setState({
+      zip: '',
+      forecast: null
+    })
   }
 
   render() {
