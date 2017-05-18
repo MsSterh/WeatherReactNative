@@ -1,29 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, TextInput, View, Image, TouchableHighlight } from 'react-native';
 
 import { connect }    from 'react-redux'
-import { fetchData }  from '../actions/weather'
+import { fetchData, updateZip }  from '../actions/weather'
 
 import Forecast from '../components/forecast.js'
 
 const mapStateToProps = state => ({
-  zip: state.weather.zip,
-  forecast: state.weather.forecast
+  zip: state.weather.weather.zip,
+  forecast: state.weather.weather.forecast
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchData: () => dispatch(fetchData())
+  fetchData: () => dispatch(fetchData()),
+  updateZip: (zip) => dispatch(updateZip(zip))
 })
 
 const App = (props) => {
-  //var content = null
-  //if (props.forecast !== null) {
-  //  content = <Forecast style={styles.forecast}
-  //                      main={props.forecast.main}
-  //                      description={props.forecast.description}
-  //                      temp={props.forecast.temp} />
-  //}
-
   return (
     <Image source={require('../images/flowers.jpg')}
            style={styles.backdrop}>
@@ -32,6 +25,14 @@ const App = (props) => {
           <Text style={styles.mainText}>
             Current weather for
           </Text>
+          <View style={styles.zipContainer}>
+            <TextInput style={[styles.zipCode, styles.mainText]}
+                       placeholder="zip..."
+                       returnKeyType="go"
+                       onChangeText={(zip) => props.updateZip(zip)}
+                       onSubmitEditing={() => props.fetchData()}
+                       value={props.zip} />
+          </View>
         </View>
       </View>
     </Image>

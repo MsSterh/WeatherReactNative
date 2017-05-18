@@ -1,4 +1,4 @@
-import { FETCHING_DATA, FETCHING_DATA_SUCCESS, FETCHING_DATA_FEILURE } from '../actions/weather'
+import { FETCHING_DATA, FETCHING_DATA_SUCCESS, FETCHING_DATA_FEILURE, UPDATE_ZIP } from '../actions/weather'
 
 const initialState = {
   status: {
@@ -17,16 +17,15 @@ export default function weather (state = initialState, action) {
     case FETCHING_DATA:
       return {
         ...state,
-        status: { isFetching: true },
-        weather: {
-          zip: '',
-          forecast: null
-        }
+        status: { isFetching: true }
       }
     case FETCHING_DATA_SUCCESS:
       return {
         ...state,
-        weather: action.weather,
+        weather: {
+          ...state.weather,
+          forecast: action.forecast
+        },
         status: {
           isFetching: false,
           isFetched: true
@@ -38,6 +37,14 @@ export default function weather (state = initialState, action) {
         status: {
           isFetching: false,
           error: true
+        }
+      }
+    case UPDATE_ZIP:
+      return {
+        ...state,
+        weather: {
+          ...state.weather,
+          zip: action.text
         }
       }
     default:
