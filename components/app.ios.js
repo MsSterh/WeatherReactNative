@@ -7,6 +7,7 @@ import { fetchData, updateZip }  from '../actions/weather'
 import Forecast from '../components/forecast.js'
 
 const mapStateToProps = state => ({
+  status: state.weather.status,
   zip: state.weather.weather.zip,
   forecast: state.weather.weather.forecast
 })
@@ -18,8 +19,13 @@ const mapDispatchToProps = dispatch => ({
 
 const App = (props) => {
   var content = null
-  if (props.forecast !== null) {
+  if (props.status.isFetching) {
+    content = <View><Text style={styles.mainText}>
+                Loading...
+              </Text></View>
+  } else if (props.forecast !== null) {
     content = <Forecast style={styles.forecast}
+                        zip={props.forecast.zip}
                         main={props.forecast.main}
                         description={props.forecast.description}
                         temp={props.forecast.temp} />

@@ -13,11 +13,11 @@ export default class Forecast extends Component {
     return (
       <View>
         <Text style={styles.bigText}>
-          {this.props.main}
+          {this.props.main} ({this.props.zip})
         </Text>
         <Text style={styles.mainText}>
           <Em>
-            Current conditions: 
+            Current conditions:&nbsp;
           </Em>
           <Strong>
             {this.props.description}

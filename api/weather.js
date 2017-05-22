@@ -5,7 +5,8 @@ export default function getForecast(zip) {
     .then((response) => response.json())
     .then((responseJSON) => {
       return {
-        main: responseJSON.weather[0].main,
+        zip: zip,
+        main: responseJSON.name,
         description: responseJSON.weather[0].description,
         temp: responseJSON.main.temp
       }
