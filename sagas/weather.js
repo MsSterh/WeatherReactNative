@@ -1,4 +1,4 @@
-import { FETCHING_DATA, getDataSuceess, getDataFailure } from '../actions/weather'
+import { FETCHING_DATA, getDataSuccess, getDataFailure } from '../actions/weather'
 import { put, call, takeEvery, select } from 'redux-saga/effects'
 import getForecast from '../api/weather'
 
@@ -8,7 +8,7 @@ function* fetchData() {
   const zip = yield select(zipFromState)
   try {
     const forecast = yield call(getForecast, zip)
-    yield put(getDataSuceess(forecast))
+    yield put(getDataSuccess(forecast))
   } catch(e) {
     yield put(getDataFailure())
   }

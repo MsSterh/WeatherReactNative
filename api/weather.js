@@ -4,7 +4,6 @@ export default function getForecast(zip) {
   return fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${KEY_API}`)
     .then((response) => response.json())
     .then((responseJSON) => {
-      console.log(responseJSON)
       return {
         main: responseJSON.weather[0].main,
         description: responseJSON.weather[0].description,

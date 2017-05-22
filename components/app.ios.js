@@ -17,6 +17,14 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const App = (props) => {
+  var content = null
+  if (props.forecast !== null) {
+    content = <Forecast style={styles.forecast}
+                        main={props.forecast.main}
+                        description={props.forecast.description}
+                        temp={props.forecast.temp} />
+  }
+
   return (
     <Image source={require('../images/flowers.jpg')}
            style={styles.backdrop}>
@@ -34,6 +42,7 @@ const App = (props) => {
                        value={props.zip} />
           </View>
         </View>
+        {content}
       </View>
     </Image>
   );
